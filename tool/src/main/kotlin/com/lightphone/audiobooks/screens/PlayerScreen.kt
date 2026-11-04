@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.lightphone.audiobooks.AudiobookLibrary
@@ -657,10 +658,14 @@ private fun PlayerContent(
             .fillMaxSize()
             .padding(horizontal = 24.dp),
     ) {
+        // Each metadata line is one line tall. A wrapping title used to grow
+        // this block until the seek bar and play controls left the screen.
         LightText(
             text = state.title,
             variant = LightTextVariant.Heading,
             align = TextAlign.Center,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
@@ -670,6 +675,8 @@ private fun PlayerContent(
                 text = author,
                 variant = LightTextVariant.Copy,
                 align = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 2.dp),
@@ -680,6 +687,8 @@ private fun PlayerContent(
                 text = chapterLabel(chapterIndex, chapterCount),
                 variant = LightTextVariant.Detail,
                 align = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .fillMaxWidth()
                     .lightClickable(onClick = onOpenChapters)
